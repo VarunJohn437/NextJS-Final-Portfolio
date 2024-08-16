@@ -9,9 +9,9 @@ const NewsPage = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=0380a21c5792428eb7251ebde4dd06b8');
+                const response = await fetch('https://api.thenewsapi.com/v1/news/top?api_token=IS1GHuyuJUf2gaUgeBrqXbfChAUxCeXKJ6dYjlzi&locale=us&limit=3');
                 const data = await response.json();
-                setNews(data.articles);
+                setNews(data.data);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching news:", error);
@@ -32,13 +32,14 @@ const NewsPage = () => {
             <ul>
                 {news?.map((article, index) => {
                     // Convert the publishedAt date to a readable format
-                    const date = new Date(article.publishedAt);
+                    const date = new Date(article.published_at);
                     const formattedDate = `${date.toLocaleTimeString()}, ${date.toLocaleDateString()}`;
 
                     return (
                         <div className='w-auto m-4 shadow-gray-400 shadow-md rounded-lg font-sans p-4 bg-slate-50'>
                             <p className='py-2 text-lg font-bold'>{article.title}</p>
-                            <p ><strong>Author :</strong> {article.author}</p>
+                            <p className='py-2 font-bold'>{article.description}</p>
+                            <p ><strong>Source :</strong> {article.source}</p>
                             <p ><strong>Published at:</strong> {formattedDate}</p>
                             <div className='text-right'>
                                 <a className='py-2 text-sky-600 underline cursor-pointer font-bold' href={article.url} target="_blank" rel="noopener noreferrer">Read more</a>
