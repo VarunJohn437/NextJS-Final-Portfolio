@@ -30,7 +30,7 @@ const NewsPage = () => {
         <div id="NewsPage" className="w-full mx-auto max-w-[800px] px-2 py-16">
             <Image src={HeaderImage} alt='' className='shadow-gray-400 shadow-md' />
             <ul>
-                {news.map((article, index) => {
+                {news?.map((article, index) => {
                     // Convert the publishedAt date to a readable format
                     const date = new Date(article.publishedAt);
                     const formattedDate = `${date.toLocaleTimeString()}, ${date.toLocaleDateString()}`;
